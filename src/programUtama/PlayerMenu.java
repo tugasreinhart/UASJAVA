@@ -25,6 +25,7 @@ public class PlayerMenu extends JFrame{
 	String bbOpen = "no";
 	//String tkBola = "no";
 	String tebakOpem = "no";
+	String scoreOpen = "no";
 	public PlayerMenu() {
 		setTitle("Menu Utama");
 		setSize(450,300);
@@ -129,12 +130,32 @@ public class PlayerMenu extends JFrame{
 				            }
 		});
 		
+		
+		Button btn_score = new Button("Lihat Highscore");
+		btn_score.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {	
+						 if(scoreOpen=="no") {
+							 	CheckHighscore skor = new CheckHighscore();
+							 	skor.setVisible(true);
+							 	scoreOpen = "yes";
+							 	skor.addWindowListener(new WindowAdapter(){
+				                    public void windowClosing(WindowEvent e) 
+				                    {
+				                    	scoreOpen = "no";
+				                    }
+				                });
+				                }
+				                else 
+				                    JOptionPane.showMessageDialog(null, "Highscore sudah terbuka.","Error",JOptionPane.ERROR_MESSAGE);  
+				            }
+		});
 
 		content.add(txt_infoPlayer);
 		content.add(btn_pacman);
 		content.add(btn_snake);
 		content.add(btn_breakb);
 		content.add(btn_tebakAngka);
+		content.add(btn_score);
 		
 		add(content);
 	}

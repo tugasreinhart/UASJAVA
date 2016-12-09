@@ -208,4 +208,21 @@ private Connection conn;
 		         stmt.close();
 		         return data;
 		     }
+		  public Vector<Vector<Object>> findScoreGame(String game) throws SQLException {
+		         Statement stmt = this.conn.createStatement();
+		         String query = "SELECT USERNAME, SCORE, GAME FROM HIGHSCORE WHERE GAME = ? ORDER BY SCORE DESC";
+		         PreparedStatement pst = conn.prepareStatement(query);
+		         pst.setString(1, game);
+		         ResultSet rs = pst.executeQuery();
+		         Vector<Vector<Object>> data = new Vector<Vector<Object>>(); // return the resultset as Vector
+		         while (rs.next()) {
+		             Vector<Object> v = new Vector<Object>();
+		             v.add(rs.getString("USERNAME"));
+		             v.add(rs.getString("SCORE"));
+		             v.add(rs.getString("GAME"));
+		             data.add(v);
+		         }
+		         stmt.close();
+		         return data;
+		     }
 }
